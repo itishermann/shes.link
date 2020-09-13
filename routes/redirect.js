@@ -3,7 +3,7 @@ const { redirect } = require("../controllers/redirect");
 
 const router = express.Router();
 
-router.get("/:id", redirect);
+router.get("/:key", redirect);
 
 module.exports = router;
 

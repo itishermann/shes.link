@@ -7,18 +7,19 @@ const exists = async (key) => {
       key: key
     }
   });
-  if (dbKey){
-    return true;
-  } else {
-    return false;
-  }
+
+  return !!dbKey;
 }
 
 const generate = () => {
-  return shortid.generate();
+  let key = shortid.generate();
+  while (exists(key) === true){
+    generate();
+  }
+  return key;
 }
 
-module.exports._key = {
+module.exports = {
   exists,
   generate
 }
