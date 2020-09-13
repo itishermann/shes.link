@@ -11,7 +11,6 @@ const redirect = async (req, res) => {
             key: key
           }
         });
-        console.log(entry);
         if(entry.url){
           return res.redirect(entry.url)
         } else {
