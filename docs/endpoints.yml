@@ -15,68 +15,86 @@ servers:
     description: 'Developpement server'
 
 paths:
-  /api/shorten:
-    put:
-      summary: 'Sample response: Return the shorten link and deletion token'
-      operationId: shortenLink
-      requestBody:
-        content:
-            'application/json':
-                schema:
-                    properties:
-                        url: 
-                            description: Long url to be shortened
-                            type: string
-                    required:
-                    - url
-      responses:
-        '200':
-          description: Link successfully shortened
-          content:
-            application/json:
-              schema:
-                properties:
-                    status:
-                        description: Status code
-                        type: integer
-                    message:
-                        description: A little message telling you everything worked
-                        type: string
-                    data: 
-                        description: Long url to be shortened
-                        type: object
-                        properties:
-                            shortUrl:
-                                description: shortened url
-                                type: string
-                            token:
-                                description: token to be used fo deletion
-                                type: string
-                            url:
-                                description: original long url
-                                type: string
-        '406':
-            description: Invalid submitted url
-            content:
-                application/json:
+    /api/shorten:
+        put:
+            summary: 'Sample response: Return the shorten link and deletion token'
+            requestBody:
+                content:
+                    'application/json':
+                        schema:
+                            properties:
+                                url: 
+                                    description: Long url to be shortened
+                                    type: string
+                            required:
+                            - url
+            responses:
+                '200':
+                description: Link successfully shortened
+                content:
+                    application/json:
                     schema:
                         properties:
                             status:
-                                description: The error status code
+                                description: Status code
                                 type: integer
                             message:
-                                description: the message explaining the error
+                                description: A little message telling you everything worked
                                 type: string
-        
-        '500':
-            description: Unexpected error
-            content:
-                application/json:
-                    schema:
-                        properties:
-                            status:
-                                description: error's status code
-                                type: integer
-                            message:
-                                description: message explaining the error
-                                type: string
+                            data: 
+                                description: Long url to be shortened
+                                type: object
+                                properties:
+                                    shortUrl:
+                                        description: shortened url
+                                        type: string
+                                    token:
+                                        description: token to be used fo deletion
+                                        type: string
+                                    url:
+                                        description: original long url
+                                        type: string
+                '406':
+                    description: Invalid submitted url
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    status:
+                                        description: The error status code
+                                        type: integer
+                                    message:
+                                        description: the message explaining the error
+                                        type: string
+                
+                '500':
+                    description: Unexpected error
+                    content:
+                        application/json:
+                            schema:
+                                properties:
+                                    status:
+                                        description: error's status code
+                                        type: integer
+                                    message:
+                                        description: message explaining the error
+                                        type: string
+    /:
+        get:
+            summary: Redirect to the long url
+            responses:
+                '200':
+                    description: You are being redirected
+                '500':
+                    description: Unexpected error
+                '404':
+                    description: Key not found
+        parameters:
+        - name: key
+          in: path
+          description: ID of shortened url
+          required: true
+          schema:
+              type: string
+                    
+
