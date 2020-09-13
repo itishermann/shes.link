@@ -4,61 +4,79 @@ info:
   title: shes.link
 servers:
   - url: 'https://shes.link'
+    description: 'Production server'
+  - url: "http://127.0.01"
+    variables:
+        port:
+            default: "5000"
+            enum:
+                - "3000"
+                - "5000"
+    description: 'Developpement server'
+
 paths:
-  /api/shortes:
-    post:
-      summary: 'Return '
+  /api/shorten:
+    put:
+      summary: 'Sample response: Return the shorten link and deletion token'
       operationId: shortenLink
-      parameters:
-        - name: id
-          in: query
-          description: ID of the user
-          required: true
-          schema:
-            type: integer
-            format: int32
-      body:
+      requestBody:
+        content:
+            'application/json':
+                schema:
+                    properties:
+                        url: 
+                            description: Long url to be shortened
+                            type: string
+                    required:
+                    - url
       responses:
         '200':
-          description: 'Sample response: Details about a user by ID'
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
+          description: Link successfully shortened
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-components:
-  schemas:
-    User:
-      type: object
-      required:
-        - id
-        - name
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        tag:
-          type: string
-    Error:
-      type: object
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
+                properties:
+                    status:
+                        description: Status code
+                        type: integer
+                    message:
+                        description: A little message telling you everything worked
+                        type: string
+                    data: 
+                        description: Long url to be shortened
+                        type: object
+                        properties:
+                            shortUrl:
+                                description: shortened url
+                                type: string
+                            token:
+                                description: token to be used fo deletion
+                                type: string
+                            url:
+                                description: original long url
+                                type: string
+        '406':
+            description: Invalid submitted url
+            content:
+                application/json:
+                    schema:
+                        properties:
+                            status:
+                                description: The error status code
+                                type: integer
+                            message:
+                                description: the message explaining the error
+                                type: string
+        
+        '500':
+            description: Unexpected error
+            content:
+                application/json:
+                    schema:
+                        properties:
+                            status:
+                                description: error's status code
+                                type: integer
+                            message:
+                                description: message explaining the error
+                                type: string
