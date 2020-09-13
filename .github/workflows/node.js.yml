@@ -12,10 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      NODE_ENV: test
-      PORT: 3000
-      BASE_URL: "http://127.0.0.1:3000" 
     services:
       postgres:
         image: postgres:11.5
@@ -36,8 +32,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npx sequelize-cli db:create
-    - run: npx sequelize-cli db:migrate
-    - run: npx sequelize-cli db:seed:all
     - run: npm test
-    - run: npx sequelize-cli db:drop
