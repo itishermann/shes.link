@@ -1,0 +1,209 @@
+{
+   "openapi": "3.0.0",
+   "info": {
+      "version": "1.0.0",
+      "title": "shes.link"
+   },
+   "servers": [
+      {
+         "url": "https://shes.link",
+         "description": "Production server"
+      },
+      {
+         "url": "http://127.0.01",
+         "variables": {
+            "port": {
+               "default": "5000",
+               "enum": [
+                  "3000",
+                  "5000"
+               ]
+            }
+         },
+         "description": "Developpement server"
+      }
+   ],
+   "paths": {
+      "/api/shorten": {
+         "put": {
+            "summary": "Sample response: Return the shorten link and deletion token",
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "properties": {
+                           "url": {
+                              "description": "Long url to be shortened",
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "url"
+                        ]
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Link successfully shortened",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "properties": {
+                              "status": {
+                                 "description": "Status code",
+                                 "type": "integer"
+                              },
+                              "message": {
+                                 "description": "A little message telling you everything worked",
+                                 "type": "string"
+                              },
+                              "data": {
+                                 "description": "Long url to be shortened",
+                                 "type": "object",
+                                 "properties": {
+                                    "shortUrl": {
+                                       "description": "shortened url",
+                                       "type": "string"
+                                    },
+                                    "token": {
+                                       "description": "token to be used fo deletion",
+                                       "type": "string"
+                                    },
+                                    "url": {
+                                       "description": "original long url",
+                                       "type": "string"
+                                    }
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "406": {
+                  "description": "Invalid submitted url",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "properties": {
+                              "status": {
+                                 "description": "The error status code",
+                                 "type": "integer"
+                              },
+                              "message": {
+                                 "description": "the message explaining the error",
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "500": {
+                  "description": "Unexpected error",
+                  "content": {
+                     "application/json": {
+                        "schema": {
+                           "properties": {
+                              "status": {
+                                 "description": "error's status code",
+                                 "type": "integer"
+                              },
+                              "message": {
+                                 "description": "message explaining the error",
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/": {
+         "get": {
+            "summary": "Redirect to the long url",
+            "responses": {
+               "200": {
+                  "description": "You are being redirected"
+               },
+               "404": {
+                  "description": "Key not found"
+               },
+               "500": {
+                  "description": "Unexpected error"
+               }
+            }
+         },
+         "parameters": [
+            {
+               "name": "key",
+               "in": "path",
+               "description": "ID of shortened url",
+               "required": true,
+               "schema": {
+                  "type": "string"
+               }
+            }
+         ]
+      },
+      "/api/": {
+         "delete": {
+            "summary": "deletes the shortened url",
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "properties": {
+                           "key": {
+                              "description": "key of the shortened url",
+                              "type": "string"
+                           },
+                           "token": {
+                              "description": "deletion token",
+                              "type": "string"
+                           }
+                        },
+                        "required": [
+                           "key",
+                           "token"
+                        ]
+                     }
+                  }
+               }
+            },
+            "responses": {
+               "200": {
+                  "description": "Deleted successfully"
+               },
+               "403": {
+                  "description": "Invalid token"
+               },
+               "404": {
+                  "description": "Unknown key"
+               },
+               "406": {
+                  "description": "Token and key combination is invalid"
+               },
+               "500": {
+                  "description": "Unexpected error"
+               }
+            }
+         },
+         "parameters": [
+            {
+               "name": "key",
+               "in": "path",
+               "description": "ID of shortened url",
+               "required": true,
+               "schema": {
+                  "type": "string"
+               }
+            }
+         ]
+      }
+   }
+}
