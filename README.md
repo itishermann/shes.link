@@ -2,6 +2,12 @@
 
 It uses only one table
 
+TODO
+- [ ] Write tests
+- [ ] Create a CI/CD
+- [ ] Create front end
+- [ ] Add coverage report
+
 ```sql
 create table enrty
  (

@@ -7,14 +7,16 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "url_shortener",
-    "password": "url_shortener",
+    "username": "postgres",
+    "password": "postgres",
     "database": "url_shortener_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   }
 }

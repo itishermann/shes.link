@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "NODE_ENV=test npx sequelize-cli db:drop && NODE_ENV=test npx sequelize-cli db:create && NODE_ENV=test npx sequelize-cli db:migrate && NODE_ENV=test npx sequelize-cli db:seed:all && NODE_ENV=test BASE_URL=http://127.0.0.1:5000 PORT=5000 nyc mocha --exit && NODE_ENV=test npx sequelize-cli db:drop",
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
     "node": "12.x"
   },
   "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "config": "^3.3.1",
     "express": "^4.17.1",
     "pg": "^8.3.3",
@@ -31,6 +35,8 @@
   "devDependencies": {
     "eslint": "^7.9.0",
     "eslint-config-google": "^0.14.0",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
     "sequelize-cli": "^6.2.0"
   }
 }

@@ -16,10 +16,14 @@ app.use("/",[express.static(__dirname + 'public'), redirect]);
 app.use("/static", express.static(__dirname + 'assets'));
 app.use("/api",[shorten, remove]);
 
-// Listen on assigned port
-app.listen(app.get('port'), function () {
-  console.log('listening on port ' + app.get('port'));
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(app.get('port'), () => {
+    console.log('listening on port ' + app.get('port'));
+  });
+} else {
+  module.exports = app;
+}
+
 
 
 
