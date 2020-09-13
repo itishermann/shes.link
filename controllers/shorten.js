@@ -1,5 +1,5 @@
 const { entries } = require('./models')
-const { token, key } = require("../utils");
+const { _token, _key } = require("../utils");
 const validUrl = require("valid-url");
 
 const createShortenUrl = async (req, res) => {
@@ -9,9 +9,9 @@ const createShortenUrl = async (req, res) => {
 
     if (validUrl.isUri(url)) {
 
-      const key = key.generate();
+      const key = _key.generate();
       const shortUrl = baseUrl + "/" + key;
-      const token = token.generate();
+      const token = _token.generate();
 
       const dbEntry = await entries.create(key, url, token);
       if (dbEntry.dataValues) {

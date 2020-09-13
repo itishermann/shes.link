@@ -18,7 +18,7 @@ const generate = () => {
   return shortid.generate();
 }
 
-module.exports.key = {
+module.exports._key = {
   exists,
   generate
 }

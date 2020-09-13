@@ -1,5 +1,4 @@
 const express = require('express');
-const pg = require('pg-promise')();
 const app = express();
 
 // Routes
@@ -17,7 +16,7 @@ const db = pg(process.env.DATABASE_URL || 'postgres://psql:psql@localhost');
 
 app.use("/",[express.static(__dirname + 'public'), redirect]);
 app.use("/static", express.static(__dirname + 'assets'));
-app.use("/api",[shorten, long, remove]);
+app.use("/api",[shorten, remove]);
 
 // Listen on assigned port
 app.listen(app.get('port'), function () {

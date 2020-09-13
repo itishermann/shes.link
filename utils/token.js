@@ -12,7 +12,7 @@ const exists = async (token) => {
 
 }
 
-module.exports.token = {
+module.exports._token = {
   generate,
   exists
 };
