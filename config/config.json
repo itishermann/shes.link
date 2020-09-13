@@ -1,0 +1,19 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "url_shortener_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "url_shortener",
+    "password": "url_shortener",
+    "database": "url_shortener_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}
