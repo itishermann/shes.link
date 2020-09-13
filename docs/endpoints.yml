@@ -3,14 +3,12 @@ info:
   version: 1.0.0
   title: shes.link
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://shes.link'
 paths:
-  /user:
-    get:
-      summary: 'Sample endpoint: Returns details about a particular user'
-      operationId: listUser
-      tags:
-        - user
+  /api/shortes:
+    post:
+      summary: 'Return '
+      operationId: shortenLink
       parameters:
         - name: id
           in: query
@@ -19,6 +17,7 @@ paths:
           schema:
             type: integer
             format: int32
+      body:
       responses:
         '200':
           description: 'Sample response: Details about a user by ID'
