@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon --inspect -r dotenv/config app.js",
-    "test": "NODE_ENV=test npx sequelize-cli db:drop && NODE_ENV=test npx sequelize-cli db:create && NODE_ENV=test npx sequelize-cli db:migrate && NODE_ENV=test npx sequelize-cli db:seed:all && NODE_ENV=test BASE_URL=http://127.0.0.1:5000 PORT=5000 nyc mocha --exit && NODE_ENV=test npx sequelize-cli db:drop",
+    "test": "NODE_ENV=test npx sequelize-cli db:drop && NODE_ENV=test npx sequelize-cli db:create && NODE_ENV=test npx sequelize-cli db:migrate && NODE_ENV=test npx sequelize-cli db:seed:all && NODE_ENV=test BASE_URL=http://127.0.0.1:5000 PORT=5000 nyc --reporter=html --reporter=text mocha --exit && NODE_ENV=test npx sequelize-cli db:drop",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:init": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
@@ -36,6 +37,7 @@
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
+    "coveralls": "^3.1.0",
     "eslint": "^7.9.0",
     "eslint-config-google": "^0.14.0",
     "mocha": "^8.1.3",
