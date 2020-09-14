@@ -1,8 +1,7 @@
 'use strict';
 
 require('mocha');
-const app = require('../app');
-app.listen(process.env.PORT);
+require("../app");
 
 describe('\n--- FUNCTIONS ---\n', function () {
   require('./functions')();
