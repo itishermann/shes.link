@@ -7,8 +7,8 @@ const redirect = require("./routes/redirect");
 
 app.use(express.json({}));
 
-app.use("/",[express.static(__dirname + 'public'), redirect]);
-app.use("/static", express.static(__dirname + 'assets'));
+app.use("/",[express.static(__dirname + '/public'), redirect]);
+app.use("/static", express.static(__dirname + '/assets'));
 app.use("/api",[shorten, remove]);
 
 app.listen(process.env.PORT, () => {
