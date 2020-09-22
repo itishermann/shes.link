@@ -1,6 +1,6 @@
 # shes.link url shortener
-[![GitHub deployments](https://img.shields.io/github/deployments/hermannkk/shes.link/snowtrust-url-shortener?label=Heroku)](https://github.com/HermannKK/shes.link/deployments/activity_log?environment=snowtrust-url-shortener)
-[![Test](https://github.com/HermannKK/shes.link/workflows/Test/badge.svg)](https://github.com/HermannKK/shes.link/actions?query=workflow%3ATest)
+[![GitHub deployments](https://img.shields.io/github/deployments/itishermann/shes.link/snowtrust-url-shortener?label=Heroku)](https://github.com/itishermann/shes.link/deployments/activity_log?environment=snowtrust-url-shortener)
+[![Test](https://github.com/itishermann/shes.link/workflows/Test/badge.svg)](https://github.com/itishermann/shes.link/actions?query=workflow%3ATest)
 [![website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fshes.link)](https://shes.link)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HermannKK_shes.link&metric=alert_status)](https://sonarcloud.io/dashboard?id=HermannKK_shes.link)
 [![Coverage Status](https://coveralls.io/repos/github/HermannKK/shes.link/badge.svg?branch=master)](https://coveralls.io/github/HermannKK/shes.link?branch=master)
