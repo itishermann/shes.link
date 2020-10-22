@@ -1,10 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Shorten url</title>
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shes.link - Free URL Shortener</title>
+  <meta content="The perfect free URL shortener for transforming long, ugly links into nice, memorable and trackable short URLs. Use it to shorten links" name="description">
+  <link rel="icon" href="/favicon.ico"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Cookie Consent by https://www.CookieConsent.com -->
+  <script type="text/javascript" src="//www.cookieconsent.com/releases/3.1.0/cookie-consent.js"></script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      cookieconsent.run({ "notice_banner_type": "simple", "consent_type": "express", "palette": "light", "language": "en", "website_name": "shes.link" });
+    });
+  </script>
+
+  <!-- Media.net -->
+  <script type="text/plain" cookie-consent="targeting">
+    window._mNHandle = window._mNHandle || {};
+    window._mNHandle.queue = window._mNHandle.queue || [];
+    medianet_versionId = "3121199";
+</script>
+  <script type="text/plain" cookie-consent="targeting" src="https://contextual.media.net/dmedianet.js?cid=8CU8MGKJD"
+    async="async"></script>
+  <!-- end of Media.net-->
+
+  <noscript>ePrivacy and GPDR Cookie Consent by <a href="https://www.CookieConsent.com/" rel="nofollow noopener">Cookie
+      Consent</a></noscript>
+  <!-- End Cookie Consent by https://www.CookieConsent.com -->
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700");
+
+    *,
+    *::after,
+    *::before {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    html {
+      font-size: 62.5%;
+    }
+
+    body {
+      font-family: "Gilroy extrabold", sans-serif;
+      font-weight: 400;
+      color: #778a99;
+      background: #E0E5EC;
+      box-sizing: border-box;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      padding: 3rem 4rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+    }
+
+    .main {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main .content {
+      padding: 0 4rem;
+      width: 100%;
+      max-width: 55rem;
+    }
+
+    .main .content h2 {
+      font-size: 3.5rem;
+      margin-bottom: 1.7rem;
+      text-align: center;
+    }
+
+    .main .content .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .main .content .neumorph-input {
+      position: absolulte;
+      display: block;
+      width: 100%;
+      max-width: 55rem;
+      border: 0;
+      color: inherit;
+      font-family: "Open Sans", sans;
+      font-weight: 400;
+      font-size: 1.7rem;
+      padding: 1.5rem 1rem 1.5rem 2.3rem;
+      border-radius: 2.5rem;
+      box-shadow: 0 0 3rem 0 rgba(43, 86, 112, 0.1);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .main .content .neumorph-input:focus {
+      outline: none;
+      color: inherit;
+    }
+
+    .main .content .neumorph-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      border: 0;
+      border-radius: 2.5rem;
+      line-height: 1;
+      padding: 1.8rem 1.75rem;
+      background: #778a99;
+      color: #E0E5EC;
+      font-size: 1.7rem;
+    }
+
+    .main .content .neumorph-btn:focus {
+      outline: none;
+    }
+
+    .main .content .output {
+      margin-top: 3rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+      box-shadow: 9px 9px 16px #A3B1C6, -9px -9px 16px #FFFFFF;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .main .content .output a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 1.8rem;
+      text-overflow: ellipsis;
+    }
+
+    .credits {
+      position: fixed;
+      top: calc(90vh);
+      left: 4rem;
+      font-family: "Open Sans", sans-serif;
+      color: #A3B1C6;
+      font-size: 1.75rem;
+    }
+
+    .credits a {
+      color: #778a99;
+    }
+
+    @media (max-width: 576px) {
+      html {
+        font-size: 50%;
+      }
+    }
+
+    .loader {
+      border: 6px solid #f3f3f3;
+      /* Light grey */
+      border-top: 6px solid #3498db;
+      /* Blue */
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>Shes.link</h2>
+  </header>
+  <div class='main'>
+    <div class="content">
+      <h2>An simple url shortener</h2>
+      <div class="input-group">
+        <form id="shorten-form">
+          <input type="text" class='neumorph-input' id="longurl"
+            placeholder='https://www.my-super-long-long-long-url.com' required />
+          <div id="shorten-button">
+            <input type="submit" class="neumorph-btn" value="Go" />
+          </div>
+        </form>
+      </div>
+
+      <div class="output" id="output-link" data-clipboard-target="#shorten-link">
+        <a id="shorten-link">
+          Shortened url
+        </a>
+        <br><i id="hint-link"></i>
+      </div>
+
+      <div class="output" id="output-token" data-clipboard-target="#shorten-token">
+        <a id="shorten-token">
+          Token for deletion
+        </a>
+        <br><i id="hint-token"></i>
+      </div>
+      <div id="156874336">
+        <script type="text/javascript">
+          try {
+            window._mNHandle.queue.push(function () {
+              window._mNDetails.loadTag("156874336", "728x90", "156874336");
+            });
+          }
+          catch (error) { }
+        </script>
+      </div>
+    </div>
+    <div class="credits">
+      Design by <a href="https://ravilamkoti.cf" class=''>Raven</a><br>
+      Api by <a href="https://itishermann.me" class=''>ItIsHermann</a><br>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    $(document).ready(() => {
+      var loading = '<div class="loader"></div>'
+      var inputButton = '<input type="submit" class="neumorph-btn" value="Go" />';
+
+      $("#shorten-form").submit((e) => {
+        e.preventDefault();
+        var longUrl = $("#longurl").val();
+        $("#longurl").prop("disabled", true);
+        $("#shorten-button").html(loading);
+        axios({
+          method: 'put',
+          url: 'http://localhost:5000/api/shorten',
+          data: {
+            url: longUrl
+          }
+        }).then((response) => {
+          var { shortUrl, token } = response.data.data;
+          $("#shorten-button").html(inputButton);
+          $("#longurl").prop("disabled", false);
+          $("#shorten-link").html(shortUrl);
+          if (token) {
+            $("#shorten-token").html(token);
+            $("#hint-token").html('Click to copy to clipboard.');
+          } else {
+            $("#shorten-token").html("Sorry, we can't give it to you. You are not the first on this link.");
+          }
+          $("#hint-link").html('Click to copy to clipboard.');
+          var clipboardLink = new ClipboardJS('#output-link');
+          clipboardLink.on('success', (e) => {
+            document.getElementById("hint-link").innerHTML = '<b>Copied!<b>'
+            e.clearSelection();
+          });
+          clipboardLink.on('error', (e) => {
+            document.getElementById("hint-link").innerHTML = 'Something went wrong. Try again please.'
+          });
+
+          var clipboardToken = new ClipboardJS('#output-token');
+          clipboardToken.on('success', (e) => {
+            document.getElementById("hint-token").innerHTML = '<b>Copied!<b>'
+            e.clearSelection();
+          });
+          clipboardToken.on('error', (e) => {
+            document.getElementById("hint-token").innerHTML = 'Something went wrong. Try again please.'
+          });
+        }).catch((error) => {
+          $("#shorten-link").html("An error occured. Try again please.");
+          $("#shorten-button").html(inputButton);
+          $("#longurl").prop("disabled", false);
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>

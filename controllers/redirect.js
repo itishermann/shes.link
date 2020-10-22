@@ -14,13 +14,10 @@ const redirect = async (req, res) => {
         if(entry.url){
           return res.redirect(entry.url)
         } else {
-          return res.sendFile('../public/404.html', {root: __dirname });
+          return res.status(404).sendFile('/../public/404.html', {root: __dirname });
         }
       } else {
-        return res.status(404).send({
-          status: 404,
-          message: "Unknown key."
-        });
+        return res.status(404).sendFile('/../public/404.html', {root: __dirname });
       }
   } catch (error) {
     console.log(error);

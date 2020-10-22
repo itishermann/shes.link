@@ -19,7 +19,6 @@ const createShortenUrl = async (req, res) => {
   try{
     const { url } = req.body;
     const baseUrl = process.env.BASE_URL;
-
     if (validUrl.isUri(url)) {
       const alreadyShortened = await returnShortenIfExists(url)
       if(alreadyShortened !== false){
