@@ -1,7 +1,7 @@
 const { entries } = require('../models')
 const { _token, _key } = require("../utils");
 
-const removeShortenUrl = async (req, res) => {
+const removeShortenUrl = async (req, res, next) => {
   try{
     const { key } = req.params;
     const { token } = req.body;
@@ -46,11 +46,7 @@ const removeShortenUrl = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    return res.status(500).send({
-      status: 500,
-      message: "We got a problem here. Try again later"
-    });
+    return next(error);
   }
 }
 

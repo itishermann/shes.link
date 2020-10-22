@@ -15,7 +15,7 @@ const returnShortenIfExists = async (url) => {
   }
 }
 
-const createShortenUrl = async (req, res) => {
+const createShortenUrl = async (req, res, next) => {
   try{
     const { url } = req.body;
     const baseUrl = process.env.BASE_URL;
@@ -62,11 +62,7 @@ const createShortenUrl = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
-    return res.status(500).send({
-      status: 500,
-      message: "We got a problem here. Try again later"
-    });
+    return next(error);
   }
 }
 

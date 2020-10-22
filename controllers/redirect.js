@@ -1,7 +1,8 @@
+const path = require('path');
 const { entries } = require('../models')
 const { _key } = require("../utils");
 
-const redirect = async (req, res) => {
+const redirect = async (req, res, next) => {
   try{
     const { key } = req.params;
     const exists = await _key.exists(key);
@@ -14,17 +15,13 @@ const redirect = async (req, res) => {
         if(entry.url){
           return res.redirect(entry.url)
         } else {
-          return res.status(404).sendFile('/../public/404.html', {root: __dirname });
+          return res.status(404).sendFile('404.html', {root: path.join(__dirname, '../public')});
         }
       } else {
-        return res.status(404).sendFile('/../public/404.html', {root: __dirname });
+        return res.status(404).sendFile('404.html', {root: path.join(__dirname, '../public') });
       }
   } catch (error) {
-    console.log(error);
-    return res.status(500).send({
-      status: 500,
-      message: "We got a problem here. Try again later"
-    });
+    return next(error);
   }
 }
 
