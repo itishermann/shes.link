@@ -1,5 +1,4 @@
 const express = require('express');
-const logger = require('morgan');
 const favicon = require('serve-favicon');
 const path = require('path');
 const createError = require('http-errors');
@@ -11,7 +10,10 @@ const remove = require("./routes/remove");
 const redirect = require("./routes/redirect");
 
 app.use(express.json({}));
-if(process.env.NODE_ENV !== 'production') app.use(logger('dev'));
+if(process.env.NODE_ENV !== 'production'){ 
+  const logger = require('morgan');
+  app.use(logger('dev')); 
+}
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use("/",redirect);
